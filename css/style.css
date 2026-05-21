@@ -1,0 +1,348 @@
+/* COPLA Eco Coaster - Apple Style Reference */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --color-ink: #1d1d1f;
+  --color-graphite: #707070;
+  --color-slate: #474747;
+  --color-ash: #333333;
+  --color-fog: #f5f5f7;
+  --color-snow: #ffffff;
+  --color-obsidian: #000000;
+  --color-silver-mist: #e8e8ed;
+  --color-azure: #0071e3;
+  --color-cobalt-link: #0066cc;
+  --gradient-citrus: linear-gradient(184deg, rgb(29, 29, 31) 0%, rgb(223, 231, 79) 33%, rgb(94, 156, 42) 66%, rgb(10, 134, 26) 95%);
+  --gradient-indigo: linear-gradient(184deg, rgb(29, 29, 31) 20%, rgb(168, 211, 251) 43%, rgb(0, 18, 249) 76%, rgb(37, 53, 224) 95%);
+  --gradient-blush: linear-gradient(184deg, rgb(29, 29, 31) 20%, rgb(243, 196, 246) 43%, rgb(245, 0, 180) 76%, rgb(204, 41, 188) 95%);
+
+  /* Typography — Font Families (using Inter as SF Pro substitute) */
+  --font-sf-pro-display: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sf-pro-text: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Typography — Weights */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Layout */
+  --page-max-width: 1200px;
+  
+  /* Border Radius */
+  --radius-cards: 28px;
+  --radius-buttons: 999px;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sf-pro-text);
+  background-color: var(--color-fog);
+  color: var(--color-ink);
+}
+
+body {
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.1px;
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center { text-align: center; }
+
+/* Typography Scale */
+.text-display {
+  font-family: var(--font-sf-pro-display);
+  font-size: 64px; /* Scaled down from 96px */
+  line-height: 1.05;
+  letter-spacing: -1.2px;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.text-heading-lg {
+  font-family: var(--font-sf-pro-display);
+  font-size: 48px; /* Scaled down from 56px */
+  line-height: 1.1;
+  letter-spacing: -0.6px;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.text-heading {
+  font-family: var(--font-sf-pro-display);
+  font-size: 32px; /* Scaled down from 40px */
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+}
+
+.text-heading-sm {
+  font-family: var(--font-sf-pro-display);
+  font-size: 21px; /* Scaled down from 24px */
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+}
+
+.text-subheading {
+  font-size: 18px; /* Scaled down from 20px */
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  font-weight: var(--weight-light);
+}
+
+.text-body {
+  font-size: 16px; /* Scaled down from 17px */
+  line-height: 1.5;
+  letter-spacing: -0.1px;
+  font-weight: var(--weight-regular);
+  color: var(--color-graphite);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--font-sf-pro-text);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-buy {
+  background-color: var(--color-azure);
+  color: var(--color-snow);
+  border-radius: var(--radius-buttons);
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+}
+
+.btn-buy:hover {
+  background-color: #0077ed;
+  transform: scale(1.02);
+}
+
+.btn-dark {
+  background-color: var(--color-obsidian);
+  color: var(--color-snow);
+  border-radius: var(--radius-buttons);
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+}
+
+.btn-dark:hover {
+  transform: scale(1.02);
+}
+
+.link-inline {
+  color: var(--color-cobalt-link);
+  font-size: 15px;
+  font-weight: var(--weight-medium);
+}
+
+.link-inline:hover {
+  text-decoration: underline;
+}
+
+/* Navigation */
+.global-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  background-color: rgba(245, 245, 247, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background-color 0.3s ease;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-brand {
+  font-size: 16px;
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.2px;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  color: var(--color-ink);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  opacity: 1;
+}
+
+/* Cards & Surfaces */
+.section-band {
+  padding: 60px 0;
+}
+
+.bg-snow {
+  background-color: var(--color-snow);
+}
+
+.bg-fog {
+  background-color: var(--color-fog);
+}
+
+.bg-black {
+  background-color: var(--color-obsidian);
+  color: var(--color-snow);
+}
+
+.bg-black .text-heading,
+.bg-black .text-heading-sm,
+.bg-black .text-display {
+  color: var(--color-snow);
+}
+
+.feature-card {
+  border-radius: var(--radius-cards);
+  padding: 32px;
+  box-shadow: none; /* ZERO SHADOWS */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+}
+
+.card-snow {
+  background-color: var(--color-snow);
+}
+
+.card-fog {
+  background-color: var(--color-fog);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Specific Sections */
+.hero {
+  padding-top: 100px;
+  padding-bottom: 60px;
+  text-align: center;
+  background-color: var(--color-fog);
+}
+
+.product-image {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  mix-blend-mode: darken; /* Ensures white backgrounds blend perfectly into fog */
+  image-rendering: high-quality;
+}
+
+.theatrical-stage {
+  min-height: 100vh;
+  background: var(--gradient-citrus);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-snow);
+  padding: 80px 20px;
+}
+
+.theatrical-stage .text-heading-lg {
+  color: var(--color-snow);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .text-display {
+    font-size: 72px;
+    letter-spacing: -1.5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-display {
+    font-size: 48px;
+    letter-spacing: -0.8px;
+  }
+  .text-heading-lg {
+    font-size: 40px;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Forms (Apple style inputs) */
+.apple-input {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--color-silver-mist);
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-sf-pro-text);
+  font-size: 17px;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+
+.apple-input:focus {
+  outline: 2px solid var(--color-azure);
+}

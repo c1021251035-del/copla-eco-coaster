@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COPLA | B2B</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-fog">
+
+    <!-- Global Navigation Bar -->
+    <nav class="global-nav">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-brand">COPLA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Overview</a></li>
+                <li><a href="story.html">Story</a></li>
+                <li><a href="b2b.html" class="active">B2B</a></li>
+                <li><a href="partnership.html">Partnership</a></li>
+            </ul>
+            <a href="shop.html" class="btn-buy" style="font-size: 12px; padding: 4px 12px;">Beli</a>
+        </div>
+    </nav>
+
+    <section class="section-band" style="padding-top: 140px;">
+        <div class="container text-center">
+            <h1 class="text-heading-lg" style="margin-bottom: 24px;">Skala besar. Dampak besar.</h1>
+            <p class="text-subheading" style="color: var(--color-ink); max-width: 600px; margin: 0 auto 60px auto;">Pesan dalam jumlah besar (>50 unit) untuk mendapatkan harga grosir dan opsi kustomisasi logo eksklusif untuk Kafe atau Hotel Anda.</p>
+            
+            <div class="feature-card card-snow" style="max-width: 700px; margin: 0 auto; text-align: left; padding: 48px;">
+                <form id="b2bForm" action="javascript:void(0);">
+                    <div style="margin-bottom: 24px;">
+                        <input type="text" id="companyName" class="apple-input" placeholder="Nama Bisnis / Kafe" required>
+                        <input type="text" id="contactName" class="apple-input" placeholder="Nama Anda" required>
+                        <input type="tel" id="waNumber" class="apple-input" placeholder="Nomor WhatsApp" required>
+                        <input type="number" id="orderQty" class="apple-input" min="50" placeholder="Estimasi Jumlah (Min. 50)" required>
+                    </div>
+                    <div style="margin-bottom: 32px;">
+                        <textarea id="customReq" class="apple-input" rows="4" placeholder="Kebutuhan Kustomisasi (opsional)"></textarea>
+                    </div>
+                    <button type="submit" class="btn-buy" style="width: 100%; padding: 16px; border: none; font-size: 17px; cursor: pointer;">Kirim Permintaan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: var(--color-fog); padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05);">
+        <div class="container">
+            <p class="text-body" style="font-size: 12px; color: var(--color-graphite);">Copyright &copy; 2026 COPLA Eco Coaster Pontianak. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

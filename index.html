@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COPLA Eco Coaster</title>
+    <meta name="description" content="COPLA Eco Coaster: Tatakan gelas komposit premium dari limbah ampas kopi dan plastik.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Global Navigation Bar -->
+    <nav class="global-nav">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-brand">COPLA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Overview</a></li>
+                <li><a href="story.html">Story</a></li>
+                <li><a href="b2b.html">B2B</a></li>
+                <li><a href="partnership.html">Partnership</a></li>
+            </ul>
+            <a href="shop.html" class="btn-buy" style="font-size: 12px; padding: 4px 12px;">Beli</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="text-heading-sm" style="margin-bottom: 8px;">COPLA Neo</h2>
+            <h1 class="text-display" style="margin-bottom: 24px;">Harmoni Kopi.<br>Dan Konservasi.</h1>
+            <p class="text-body" style="margin-bottom: 32px;">Mulai dari Rp 35.000</p>
+            <a href="shop.html" class="btn-buy" style="margin-bottom: 60px;">Beli Sekarang</a>
+            
+            <img src="assets/images/copla_coaster_clean.png" alt="COPLA Eco Coaster" class="product-image" style="margin-top: 40px;">
+        </div>
+    </section>
+
+    <!-- Impact Calculator in a Fog Feature Card on Snow background -->
+    <section class="section-band bg-snow">
+        <div class="container text-center">
+            <h2 class="text-heading-lg" style="margin-bottom: 80px;">Hitung Dampak Anda.</h2>
+            
+            <div class="feature-card card-fog" style="max-width: 800px; margin: 0 auto; padding: 48px;">
+                <p class="text-subheading" style="margin-bottom: 24px; color: var(--color-ink);">Berapa banyak tatakan gelas yang Anda butuhkan?</p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 48px;">
+                    <input type="range" id="coasterCount" min="1" max="500" value="1" style="width: 60%; accent-color: var(--color-ink);">
+                    <input type="number" id="coasterCountNumber" min="1" max="500" value="1" class="apple-input" style="width: 100px; margin-bottom: 0; padding: 8px; text-align: center;">
+                </div>
+                
+                <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div>
+                        <span class="text-heading" id="resCoffee" style="display: block; margin-bottom: 8px;">70g</span>
+                        <span class="text-body" style="font-size: 14px;">Ampas Kopi</span>
+                    </div>
+                    <div>
+                        <span class="text-heading" id="resPlastic" style="display: block; margin-bottom: 8px;">80g</span>
+                        <span class="text-body" style="font-size: 14px;">Plastik PP</span>
+                    </div>
+                    <div>
+                        <span class="text-heading" id="resCarbon" style="display: block; margin-bottom: 8px;">0.6kg</span>
+                        <span class="text-body" style="font-size: 14px;">Reduksi CO2e</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Grid -->
+    <section class="section-band bg-fog">
+        <div class="container">
+            <div class="card-grid">
+                <div class="feature-card card-snow" style="padding: 48px;">
+                    <h3 class="text-heading-sm" style="margin-bottom: 16px;">Cerita Kami.</h3>
+                    <p class="text-body" style="margin-bottom: 32px;">Pelajari proses daur ulang dari TPA Batu Layang hingga menjadi mahakarya.</p>
+                    <a href="story.html" class="link-inline">Kenali lebih lanjut ></a>
+                </div>
+                <div class="feature-card card-snow" style="padding: 48px;">
+                    <h3 class="text-heading-sm" style="margin-bottom: 16px;">Pesan Massal.</h3>
+                    <p class="text-body" style="margin-bottom: 32px;">Lengkapi meja kafe atau kamar hotel Anda dengan sentuhan berkelanjutan.</p>
+                    <a href="b2b.html" class="link-inline">Lihat penawaran B2B ></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: var(--color-fog); padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05);">
+        <div class="container">
+            <p class="text-body" style="font-size: 12px; color: var(--color-graphite);">Copyright &copy; 2026 COPLA Eco Coaster Pontianak. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
