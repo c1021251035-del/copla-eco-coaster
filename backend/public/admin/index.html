@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COPLA Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; padding: 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    h1 { font-size: 28px; font-weight: 600; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .stat-card .label { font-size: 13px; color: #86868b; }
+    .stat-card .value { font-size: 32px; font-weight: 600; margin-top: 4px; }
+    .stat-card .value.pending { color: #d29922; }
+    .stat-card .value.done { color: #1d1d1f; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+    .tab { padding: 10px 20px; border: none; background: white; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .tab.active { background: #1d1d1f; color: white; }
+    .table-wrap { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid #f0f0f0; }
+    th { background: #fafafa; font-weight: 600; color: #86868b; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .status { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+    .status.pending { background: #fff3cd; color: #856404; }
+    .status.contacted { background: #cce5ff; color: #004085; }
+    .status.completed { background: #d4edda; color: #155724; }
+    .status.cancelled { background: #f8d7da; color: #721c24; }
+    .status.approved { background: #d4edda; color: #155724; }
+    .status.rejected { background: #f8d7da; color: #721c24; }
+    select { padding: 4px 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; }
+    .empty { text-align: center; padding: 48px; color: #86868b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>COPLA Admin</h1>
+    </header>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="b2b">B2B Inquiries</button>
+      <button class="tab" data-tab="partnership">Partnership</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const API = '/api';
+    let currentTab = 'b2b';
+
+    async function fetchJSON(url) {
+      const res = await fetch(url);
+      if (res.status === 401) {
+        const creds = btoa(`${prompt('Username:')}:${prompt('Password:')}`);
+        const res2 = await fetch(url, { headers: { 'Authorization': `Basic ${creds}` } });
+        return res2.json();
+      }
+      return res.json();
+    }
+
+    async function loadStats() {
+      const stats = await fetchJSON(`${API}/admin/stats`);
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="label">Total B2B</div><div class="value">${stats.totalB2b}</div></div>
+        <div class="stat-card"><div class="label">Pending B2B</div><div class="value pending">${stats.pendingB2b}</div></div>
+        <div class="stat-card"><div class="label">Total Partnership</div><div class="value">${stats.totalPartners}</div></div>
+        <div class="stat-card"><div class="label">Pending Partnership</div><div class="value pending">${stats.pendingPartners}</div></div>
+        <div class="stat-card"><div class="label">Total Kalkulasi</div><div class="value done">${stats.totalCalculations}</div></div>
+      `;
+    }
+
+    async function loadB2B() {
+      const data = await fetchJSON(`${API}/b2b/inquiries`);
+      document.getElementById('tableHead').innerHTML = '<tr><th>ID</th><th>Perusahaan</th><th>Kontak</th><th>WA</th><th>Qty</th><th>Kustom</th><th>Status</th><th>Tanggal</th></tr>';
+      if (data.length === 0) {
+        document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="empty">Belum ada data</td></tr>';
+        return;
+      }
+      document.getElementById('tableBody').innerHTML = data.map(d => `
+        <tr>
+          <td>${d.id}</td>
+          <td>${d.company_name}</td>
+          <td>${d.contact_name}</td>
+          <td>${d.wa_number}</td>
+          <td>${d.order_qty}</td>
+          <td>${d.custom_req || '-'}</td>
+          <td>
+            <select class="status-select" data-id="${d.id}" data-type="b2b">
+              <option value="pending" ${d.status==='pending'?'selected':''}>Pending</option>
+              <option value="contacted" ${d.status==='contacted'?'selected':''}>Contacted</option>
+              <option value="completed" ${d.status==='completed'?'selected':''}>Completed</option>
+              <option value="cancelled" ${d.status==='cancelled'?'selected':''}>Cancelled</option>
+            </select>
+          </td>
+          <td>${new Date(d.created_at).toLocaleDateString('id')}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function loadPartnership() {
+      const data = await fetchJSON(`${API}/partnership/registrations`);
+      document.getElementById('tableHead').innerHTML = '<tr><th>ID</th><th>Kafe</th><th>Pemilik</th><th>WA</th><th>Alamat</th><th>Status</th><th>Tanggal</th></tr>';
+      if (data.length === 0) {
+        document.getElementById('tableBody').innerHTML = '<tr><td colspan="7" class="empty">Belum ada data</td></tr>';
+        return;
+      }
+      document.getElementById('tableBody').innerHTML = data.map(d => `
+        <tr>
+          <td>${d.id}</td>
+          <td>${d.cafe_name}</td>
+          <td>${d.owner_name}</td>
+          <td>${d.wa_number}</td>
+          <td>${d.address || '-'}</td>
+          <td>
+            <select class="status-select" data-id="${d.id}" data-type="partnership">
+              <option value="pending" ${d.status==='pending'?'selected':''}>Pending</option>
+              <option value="approved" ${d.status==='approved'?'selected':''}>Approved</option>
+              <option value="rejected" ${d.status==='rejected'?'selected':''}>Rejected</option>
+            </select>
+          </td>
+          <td>${new Date(d.created_at).toLocaleDateString('id')}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function changeStatus(id, type, status) {
+      const endpoint = type === 'b2b' ? `${API}/b2b/inquiries/${id}/status` : `${API}/partnership/registrations/${id}/status`;
+      await fetch(endpoint, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+    }
+
+    document.addEventListener('change', (e) => {
+      if (e.target.classList.contains('status-select')) {
+        changeStatus(e.target.dataset.id, e.target.dataset.type, e.target.value);
+      }
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentTab = tab.dataset.tab;
+        loadTable();
+      });
+    });
+
+    function loadTable() {
+      if (currentTab === 'b2b') loadB2B();
+      else loadPartnership();
+    }
+
+    loadStats();
+    loadTable();
+  </script>
+</body>
+</html>
